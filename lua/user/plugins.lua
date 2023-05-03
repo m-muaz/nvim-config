@@ -66,6 +66,9 @@ return packer.startup(function(use)
   use { "lunarvim/darkplus.nvim", commit = "13ef9daad28d3cf6c5e793acfc16ddbf456e1c83" }
   use{  "rebelot/kanagawa.nvim" }
 
+
+  -- Vim-tmux-navigator plugin
+  use{ "christoomey/Vim-tmux-navigator" }
   -- Trouble.nvim
 use {
   "folke/trouble.nvim",
