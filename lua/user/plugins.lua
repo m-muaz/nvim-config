@@ -65,6 +65,7 @@ return packer.startup(function(use)
   use { "folke/tokyonight.nvim", commit = "66bfc2e8f754869c7b651f3f47a2ee56ae557764" }
   use { "lunarvim/darkplus.nvim", commit = "13ef9daad28d3cf6c5e793acfc16ddbf456e1c83" }
   use{  "rebelot/kanagawa.nvim" }
+  use{"catppuccin/nvim", as='catppuccin'}
 
 
   -- Vim-tmux-navigator plugin
@@ -74,6 +75,11 @@ use {
   "folke/trouble.nvim",
   requires = "nvim-tree/nvim-web-devicons",
 }
+
+  -- Nvim DAP (Debug Adapter Protocol)
+use{
+    'mfussenegger/nvim-dap'
+  }
 
   -- TODO.nvim
 use {
