@@ -7,7 +7,7 @@ local servers = {
 	-- "bashls",
 	"jsonls",
 	-- "yamlls",
-  "clangd"
+  "clangd",
 }
 
 local settings = {
@@ -21,6 +21,9 @@ local settings = {
 	},
 	log_level = vim.log.levels.INFO,
 	max_concurrent_installers = 4,
+  registries = {
+        "github:mason-org/mason-registry",
+    },
 }
 
 require("mason").setup(settings)
