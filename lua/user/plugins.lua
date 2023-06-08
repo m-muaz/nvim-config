@@ -81,6 +81,9 @@ use{
     'mfussenegger/nvim-dap'
   }
 
+  -- Vim Tex plugin
+  use {'lervag/vimtex'}
+
   -- TODO.nvim
 use {
   "folke/todo-comments.nvim",
@@ -107,10 +110,34 @@ use {
   --   -- commit = "c2002d7a6b5a72ba02388548cfaf420b864fbc12",
   --   run = ":MasonUpdate"
   -- } -- simple to use language server installer
-  use { "williamboman/mason-lspconfig.nvim", commit = "0051870dd728f4988110a1b2d47f4a4510213e31" }
-	use { "neovim/nvim-lspconfig", commit = "f11fdff7e8b5b415e5ef1837bdcdd37ea6764dda" } -- enable LSP
+  use {    "williamboman/mason-lspconfig.nvim" }
+  -- use { "williamboman/mason-lspconfig.nvim", commit = "0051870dd728f4988110a1b2d47f4a4510213e31" }
+  use {"neovim/nvim-lspconfig"}
+	-- use { "neovim/nvim-lspconfig", commit = "f11fdff7e8b5b415e5ef1837bdcdd37ea6764dda" } -- enable LSP
 	use { "jose-elias-alvarez/null-ls.nvim", commit = "c0c19f32b614b3921e17886c541c13a72748d450" } -- for formatters and linters
   use { "RRethy/vim-illuminate", commit = "a2e8476af3f3e993bb0d6477438aad3096512e42" }
+
+  -- Lsp-zero plugin
+  use {
+    'VonHeikemen/lsp-zero.nvim',
+    branch = 'v2.x',
+    requires = {
+      -- LSP Support
+      {'neovim/nvim-lspconfig'},             -- Required
+      {                                      -- Optional
+        'williamboman/mason.nvim',
+        run = function()
+          pcall(vim.cmd, 'MasonUpdate')
+        end,
+      },
+      {'williamboman/mason-lspconfig.nvim'}, -- Optional
+
+      -- Autocompletion
+      {'hrsh7th/nvim-cmp'},     -- Required
+      {'hrsh7th/cmp-nvim-lsp'}, -- Required
+      {'L3MON4D3/LuaSnip'},     -- Required
+    }
+  }
 
 	-- Telescope
 	use { "nvim-telescope/telescope.nvim", commit = "76ea9a898d3307244dce3573392dcf2cc38f340f" }
