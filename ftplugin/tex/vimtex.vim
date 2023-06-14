@@ -53,14 +53,15 @@ let g:vimtex_quickfix_ignore_filters = [
       \ 'Fatal error occurred, no output PDF file produced!',
       \]
 
-if g:os_current == "Linux"
-  let g:vimtex_view_method = 'zathura'
-elseif g:os_current == "Darwin"
-  let g:vimtex_view_method = 'skim'
-  " let g:vimtex_view_method = 'zathura'
-else
-  echom "Error: forward show not supported on this OS"
-endif
+" if g:os_current == "Linux"
+"   let g:vimtex_view_method = 'zathura'
+" elseif g:os_current == "Darwin"
+"   let g:vimtex_view_method = 'skim'
+"   " let g:vimtex_view_method = 'zathura'
+" else
+"   echom "Error: forward show not supported on this OS"
+" endif
+
 
 " Don't automatically open PDF viewer after first compilation
 let g:vimtex_view_automatic = 0
@@ -68,8 +69,8 @@ let g:vimtex_view_automatic = 0
 let g:vimtex_compiler_latexmk = {
     \ 'build_dir' : '',
     \ 'callback' : 1,
-    \ 'continuous' : 0,
-    \ 'executable' : 'latexmk',
+    \ 'continuous' : 1,
+    \ 'executable' : '/usr/local/bin/latexmk',
     \ 'hooks' : [],
     \ 'options' : [
     \   '-verbose',
