@@ -89,6 +89,7 @@ local mappings = {
   ["q"] = { "<cmd>q!<CR>", "Quit" },
   ["c"] = { "<cmd>Bdelete!<CR>", "Close Buffer" },
   ["h"] = { "<cmd>nohlsearch<CR>", "No Highlight" },
+  ["u"] = {"<cmd>ASToggle<CR>","Auto Save Toggle"},
   f = {
     name = "Telescope",
   f = {
@@ -173,6 +174,12 @@ local mappings = {
     R = { "<cmd>Telescope registers<cr>", "Registers" },
     k = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
     C = { "<cmd>Telescope commands<cr>", "Commands" },
+  },
+  
+  v = {
+    name="VimTex",
+    r = {"<cmd>VimtexReload<cr>", "Reload VimTex"},
+    c = {"<cmd>VimtexCompile<cr>", "Continuous Compile"},
   },
 
   t = {
