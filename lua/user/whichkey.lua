@@ -90,6 +90,24 @@ local mappings = {
   ["c"] = { "<cmd>Bdelete!<CR>", "Close Buffer" },
   ["h"] = { "<cmd>nohlsearch<CR>", "No Highlight" },
   ["u"] = {"<cmd>ASToggle<CR>","Auto Save Toggle"},
+  m = {
+    name = "Mason",
+    m = {
+      "<cmd>Mason<cr>", "Mason Install"
+    },
+    l = {
+      "<cmd>MasonLog<cr>", "Mason Log"
+    },
+    u = {
+      "<cmd>MasonUpdate<cr>", "Mason Update"
+    },
+    d = {
+      "<cmd>MasonUninstall<cr>", "Mason Uninstall"
+    },
+    U = {
+      "<cmd>MasonUninstallAll", "Mason Uninstall All"
+    },
+  },
   f = {
     name = "Telescope",
   f = {
