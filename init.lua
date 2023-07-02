@@ -9,7 +9,7 @@ require "user.gitsigns"
 require "user.treesitter"
 require "user.autopairs"
 require "user.comment"
-require "user.nvim-tree"
+-- require "user.nvim-tree"
 require "user.bufferline"
 require "user.lualine"
 require "user.toggleterm"
@@ -24,3 +24,9 @@ require "user.TODO"
 -- require "user.lsp_zero"
 require "user.LuaSnip"
 require "user.notify"
+require "user.neotree"
+
+
+-- colorscheme
+-- vim.cmd('colorscheme catppuccin-mocha')
+vim.cmd([[colorscheme catppuccin-mocha]])

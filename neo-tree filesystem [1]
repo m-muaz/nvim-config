@@ -1,0 +1,11 @@
+  ~/.config/nvim
+    LuaSnip
+    ftplugin
+    lua                               
+    pack
+    plugin
+    CONTRIBUTING.md
+    LICENSE
+    README.md
+    init.lua                        󰄱 
+   (3 hidden items)
