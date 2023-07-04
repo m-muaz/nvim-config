@@ -85,7 +85,7 @@ local mappings = {
 		"Buffers",
 	},
 	-- ["e"] = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
-  ["e"] = {"<Cmd>Neotree toggle<CR>","Neotree"},
+	["e"] = { "<Cmd>Neotree toggle<CR>", "Neotree" },
 	["w"] = { "<cmd>w!<CR>", "Save" },
 	["q"] = { "<cmd>q!<CR>", "Quit" },
 	["c"] = { "<cmd>Bdelete!<CR>", "Close Buffer" },
@@ -116,9 +116,10 @@ local mappings = {
 	},
 	f = {
 		name = "Telescope",
-    b = {
-      "<cmd>Telescope current_buffer_fuzzy_find<cr>", "Fuzzy Find in Buffer"
-    },
+		b = {
+			"<cmd>Telescope current_buffer_fuzzy_find<cr>",
+			"Fuzzy Find in Buffer",
+		},
 		f = {
 			"<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{winblend=20})<cr>",
 			"Find files",
@@ -134,6 +135,110 @@ local mappings = {
 		s = { "<cmd>PackerSync<cr>", "Sync" },
 		S = { "<cmd>PackerStatus<cr>", "Status" },
 		u = { "<cmd>PackerUpdate<cr>", "Update" },
+	},
+
+	d = {
+		name = " Debugger",
+		S = {
+			function()
+				require("dap").continue()
+			end,
+			"Debugger: Start",
+		},
+		t = {
+			function()
+				require("dap").terminate()
+			end,
+			"Debugger: Stop",
+		},
+		C = {
+			function()
+				vim.ui.input({ prompt = "Condition: " }, function(condition)
+					if condition then
+						require("dap").set_breakpoint(condition)
+					end
+				end)
+			end,
+			"Debugger: Conditional Breakpoint",
+		},
+		r = {
+			function()
+				require("dap").restart_frame()
+			end,
+			"Debugger: Restart",
+		},
+
+		p = {
+			function()
+				require("dap").pause()
+			end,
+			"Debugger: Pause",
+		},
+
+		T = {
+			function()
+				require("dap").toggle_breakpoint()
+			end,
+			"Debugger: Toggle Breakpoint",
+		},
+		s = {
+			name = "Step ...",
+			o = {
+				function()
+					require("dap").step_over()
+				end,
+				"Debugger: Step Over",
+			},
+			i = {
+				function()
+					require("dap").step_into()
+				end,
+				"Debugger: Step Into",
+			},
+			O = {
+				function()
+					require("dap").step_out()
+				end,
+				"Debugger: Step Out",
+			},
+		},
+
+		c = {
+			name = "Breakpoint",
+			b = {
+				function()
+					require("dap").clear_breakpoints()
+				end,
+				"Debugger: Clear Breakpoints",
+			},
+		},
+		d = {
+			name = "Session ...",
+			q = {
+				function()
+					require("dap").close()
+				end,
+				"Close Session",
+			},
+			Q = {
+				function()
+					require("dap").terminate()
+				end,
+				"Debugger: Terminate Session",
+			},
+			R = {
+				function()
+					require("dap").repl.toggle()
+				end,
+				"Toggle REPL",
+			},
+			s = {
+				function()
+					require("dap").run_to_cursor()
+				end,
+				"Run To Cursor",
+			},
+		},
 	},
 
 	g = {

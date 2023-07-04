@@ -3,6 +3,22 @@ if not status_ok then
 	return
 end
 
+
+--- Open a URL under the cursor with the current operating system
+---@param path string The path of the file to open with the system opener
+function system_open(path)
+  local cmd
+  if vim.fn.has "win32" == 1 and vim.fn.executable "explorer" == 1 then
+    cmd = { "cmd.exe", "/K", "explorer" }
+  elseif vim.fn.has "unix" == 1 and vim.fn.executable "xdg-open" == 1 then
+    cmd = { "xdg-open" }
+  elseif (vim.fn.has "mac" == 1 or vim.fn.has "unix" == 1) and vim.fn.executable "open" == 1 then
+    cmd = { "open" }
+  end
+  if not cmd then M.notify("Available system opening tool not found!", vim.log.levels.ERROR) end
+  vim.fn.jobstart(vim.fn.extend(cmd, { path or vim.fn.expand "<cfile>" }), { detach = true })
+end
+
 neoTree.setup({
 	close_if_last_window = true, -- Close Neo-tree if it is the last window left in the tab
 	popup_border_style = "rounded",
@@ -24,7 +40,7 @@ neoTree.setup({
 		},
 		indent = {
 			indent_size = 2,
-			padding = 1, -- extra padding on left hand side
+			padding = 0, -- extra padding on left hand side
 			-- indent guides
 			with_markers = true,
 			indent_marker = "│",
@@ -75,7 +91,7 @@ neoTree.setup({
 	-- see `:h neo-tree-global-custom-commands`
 	commands = {
 		system_open = function(state)
-			require("astronvim.utils").system_open(state.tree:get_node():get_id())
+			system_open(state.tree:get_node():get_id())
 		end,
 		parent_or_close = function(state)
 			local node = state.tree:get_node()
@@ -134,22 +150,22 @@ neoTree.setup({
 		end,
 	},
 	window = {
-		position = "left",
+		-- position = "left",
 		width = 30,
-		mapping_options = {
-			noremap = true,
-			nowait = true,
-		},
+		-- mapping_options = {
+		-- 	noremap = true,
+		-- 	nowait = true,
+		-- },
 		mappings = {
-			["<space>"] = {
-				-- "toggle_node",
-				-- nowait = false, -- disable `nowait` if you have existing combos starting with this char that you want to use
-			},
-			["<2-LeftMouse>"] = "open",
-			["<cr>"] = "open",
+			["<space>"] = false,
+			-- "toggle_node",
+			-- nowait = false, -- disable `nowait` if you have existing combos starting with this char that you want to use
+
+			-- ["<2-LeftMouse>"] = "open",
+			["l"] = "open",
 			["<esc>"] = "revert_preview",
 			["P"] = { "toggle_preview", config = { use_float = true } },
-			["l"] = "focus_preview",
+			["f"] = "focus_preview",
 			["S"] = "open_split",
 			["s"] = "open_vsplit",
 			-- ["S"] = "split_with_window_picker",
@@ -168,7 +184,7 @@ neoTree.setup({
 				-- this command supports BASH style brace expansion ("x{a,b,c}" -> xa,xb,xc). see `:h neo-tree-file-actions` for details
 				-- some commands may take optional config options, see `:h neo-tree-mappings` for details
 				config = {
-					show_path = "none", -- "none", "relative", "absolute"
+					show_path = "relative", -- "none", "relative", "absolute"
 				},
 			},
 			["A"] = "add_directory", -- also accepts the optional config.show_path option like "add". this also supports BASH style brace expansion.
@@ -196,7 +212,7 @@ neoTree.setup({
 	filesystem = {
 		filtered_items = {
 			visible = false, -- when true, they will just be displayed differently than normal items
-			hide_dotfiles = true,
+			hide_dotfiles = false,
 			hide_gitignored = true,
 			hide_hidden = true, -- only works on Windows for hidden files/directories
 			hide_by_name = {
