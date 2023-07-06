@@ -3,7 +3,8 @@
 local dap = require('dap')
 dap.adapters.python = {
   type = 'executable';
-  command = os.getenv('HOME') .. '/.virtualenvs/debugpy/bin/python';
+  -- command = os.getenv('HOME') .. '/.local/share/nvim/mason/packages/debugpy/venv/bin/python';
+  command = '/Users/muhammadmuaz/.local/share/nvim/mason/packages/debugpy/venv/bin/python',
   args = { '-m', 'debugpy.adapter' };
 }
 dap.configurations.python = {
@@ -21,7 +22,7 @@ dap.configurations.python = {
       elseif vim.fn.executable(cwd .. '/.venv/bin/python') == 1 then
         return cwd .. '/.venv/bin/python'
       else
-        return '/usr/bin/python'
+        return '/usr/bin/python3'
       end
     end;
   },

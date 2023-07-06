@@ -3,8 +3,8 @@ local servers = {
 	-- "cssls",
 	-- "html",
 	-- "tsserver",
-	"pyright",
 	-- "bashls",
+  "pyright",
 	"jsonls",
 	-- "yamlls",
   "clangd"

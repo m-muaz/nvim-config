@@ -145,7 +145,7 @@ local mappings = {
 			end,
 			"Debugger: Start",
 		},
-		t = {
+		x = {
 			function()
 				require("dap").terminate()
 			end,
@@ -175,7 +175,7 @@ local mappings = {
 			"Debugger: Pause",
 		},
 
-		T = {
+		b = {
 			function()
 				require("dap").toggle_breakpoint()
 			end,
