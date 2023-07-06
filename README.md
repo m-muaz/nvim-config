@@ -1,4 +1,4 @@
-# Neovim from scratch
+# Neovim from scratch (Cloned from chrisatmachine > Neovim from Scratch repository and updated!!)
 
 **Update** When I initially created this repo I didn't anticipate the amount of breaking changes introduced by the rapidly developing plugin ecosystem. If you'd like to use the same basic config as this one as a base I can also recommend my newer repo: [nvim-basic-ide](https://github.com/LunarVim/nvim-basic-ide)
 
