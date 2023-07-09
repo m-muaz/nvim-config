@@ -19,7 +19,8 @@ end
 vim.cmd([[
   augroup packer_user_config
     autocmd!
-    autocmd BufWritePost plugins.lua source <afile> | PackerSync
+    " autocmd BufWritePost plugins.lua source <afile> | PackerSync
+    autocmd BufWritePost plugins.lua source <afile>
   augroup end
 ]])
 
@@ -136,6 +137,19 @@ return packer.startup(function(use)
 		end,
 	})
 
+	-- Barbecue.nvim
+	use({
+		"utilyre/barbecue.nvim",
+		tag = "*",
+		requires = {
+			"SmiteshP/nvim-navic",
+			"nvim-tree/nvim-web-devicons", -- optional dependency
+		},
+		config = function()
+			require("barbecue").setup()
+		end,
+	})
+
 	-- Vim-tmux-navigator plugin
 	use({ "christoomey/Vim-tmux-navigator" })
 	-- Trouble.nvim
@@ -147,8 +161,19 @@ return packer.startup(function(use)
 	-- Nvim DAP (Debug Adapter Protocol)
 	use({
 		"mfussenegger/nvim-dap",
+		requires = {
+			"theHamsta/nvim-dap-virtual-text",
+			"rcarriga/nvim-dap-ui",
+		},
 	})
-
+	use({
+		"folke/neodev.nvim",
+		config = function()
+			require("neodev").setup({
+				library = { plugins = { "nvim-dap-ui" }, types = true },
+			})
+		end,
+	})
 	-- Nvim DAP UI
 	use({
 		"rcarriga/nvim-dap-ui",
@@ -162,10 +187,7 @@ return packer.startup(function(use)
 	})
 	use({ "theHamsta/nvim-dap-virtual-text" })
 
-	-- use({
-	-- 	"mfussenegger/nvim-dap-python",
-	-- 	requires = { "mfussenegger/nvim-dap", "rcarriga/nvim-dap-ui" },
-	-- })
+	use({ "Civitasv/cmake-tools.nvim" })
 
 	-- Vim Tex plugin
 	use({ "lervag/vimtex" })
@@ -232,7 +254,7 @@ return packer.startup(function(use)
 	-- -- Unless you are still migrating, remove the deprecated commands from v1.x
 	-- vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
 	-- use {
-	--   "nvim-neo-tree/neo-tree.nvim",
+	--   "n'folke/neodev.nvim'vim-neo-tree/neo-tree.nvim",
 	--     branch = "v2.x",
 	--     requires = {
 	--       "nvim-lua/plenary.nvim",
@@ -297,8 +319,12 @@ return packer.startup(function(use)
 	})
 
 	-- Telescope
-	use({ "nvim-telescope/telescope.nvim", commit = "76ea9a898d3307244dce3573392dcf2cc38f340f" })
-
+	use({
+		"nvim-telescope/telescope.nvim",
+		tag = "0.1.2",
+		-- or                            , branch = '0.1.x',
+		requires = { { "nvim-lua/plenary.nvim" } },
+	})
 	-- Treesitter
 	use({
 		"nvim-treesitter/nvim-treesitter",

@@ -26,7 +26,13 @@ require("user.LuaSnip")
 require("user.notify")
 require("user.neotree")
 require("user.nvim-dap")
--- require("user.pydap")
+require("user.cmake-nvim")
+
+
 -- colorscheme
 -- vim.cmd('colorscheme catppuccin-mocha')
 vim.cmd([[colorscheme catppuccin-mocha]])
+
+
+-- Enable mouse support
+vim.o.mouse = "a"
