@@ -27,7 +27,7 @@ require("user.notify")
 require("user.neotree")
 require("user.nvim-dap")
 require("user.cmake-nvim")
-
+require("user.dap-virtual")
 
 -- colorscheme
 -- vim.cmd('colorscheme catppuccin-mocha')
