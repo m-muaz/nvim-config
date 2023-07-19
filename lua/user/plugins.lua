@@ -209,7 +209,7 @@ return packer.startup(function(use)
 	-- Neo-tree plugin
 	use({
 		"nvim-neo-tree/neo-tree.nvim",
-		branch = "v2.x",
+		branch = "v3.x",
 		requires = {
 			"nvim-lua/plenary.nvim",
 			"nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
@@ -325,10 +325,63 @@ return packer.startup(function(use)
 		-- or                            , branch = '0.1.x',
 		requires = { { "nvim-lua/plenary.nvim" } },
 	})
-	-- Treesitter
-	use({
+	-- -- Treesitter
+	-- use({
+	-- 	"nvim-treesitter/nvim-treesitter",
+	-- 	commit = "8e763332b7bf7b3a426fd8707b7f5aa85823a5ac",
+	-- })
+
+	use({ -- Highlight, edit, and navigate code
 		"nvim-treesitter/nvim-treesitter",
-		commit = "8e763332b7bf7b3a426fd8707b7f5aa85823a5ac",
+		build = function()
+			pcall(require("nvim-treesitter.install").update({ with_sync = true }))
+		end,
+		config = function()
+			require("nvim-treesitter.configs").setup({
+				sync_install = false,
+				ensure_installed = {
+					"bash",
+					"c",
+					"javascript",
+					"json",
+					"lua",
+					"python",
+					"typescript",
+					"tsx",
+					"css",
+					"rust",
+					"java",
+					"yaml",
+					"markdown",
+					"markdown_inline",
+				}, -- one of "all" or a list of languages
+				ignore_install = { "phpdoc" }, -- List of parsers to ignore installing
+				highlight = {
+					enable = true, -- false will disable the whole extension
+					disable = { "css" }, -- list of language that will be disabled
+				},
+				autopairs = {
+					enable = true,
+				},
+				indent = { enable = true, disable = { "python", "css" } },
+
+				auto_install = true,
+				highlight = {
+					enable = true,
+					additional_vim_regex_highlighting = false,
+				},
+				-- indent = {
+				-- 	enable = true,
+				-- },
+				autotag = {
+					enable = true,
+				},
+			})
+
+			-- -- folding with treesitter
+			-- vim.opt.foldmethod = "expr"
+			-- vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+		end,
 	})
 
 	use({

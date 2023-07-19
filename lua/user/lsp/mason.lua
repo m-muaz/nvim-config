@@ -7,7 +7,7 @@ local servers = {
   "pyright",
 	"jsonls",
 	-- "yamlls",
-  "clangd"
+  "clangd",
   -- "matlab-language-server"
 }
 

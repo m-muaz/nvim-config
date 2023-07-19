@@ -3,20 +3,21 @@ if not status_ok then
 	return
 end
 
-
 --- Open a URL under the cursor with the current operating system
 ---@param path string The path of the file to open with the system opener
 function system_open(path)
-  local cmd
-  if vim.fn.has "win32" == 1 and vim.fn.executable "explorer" == 1 then
-    cmd = { "cmd.exe", "/K", "explorer" }
-  elseif vim.fn.has "unix" == 1 and vim.fn.executable "xdg-open" == 1 then
-    cmd = { "xdg-open" }
-  elseif (vim.fn.has "mac" == 1 or vim.fn.has "unix" == 1) and vim.fn.executable "open" == 1 then
-    cmd = { "open" }
-  end
-  if not cmd then M.notify("Available system opening tool not found!", vim.log.levels.ERROR) end
-  vim.fn.jobstart(vim.fn.extend(cmd, { path or vim.fn.expand "<cfile>" }), { detach = true })
+	local cmd
+	if vim.fn.has("win32") == 1 and vim.fn.executable("explorer") == 1 then
+		cmd = { "cmd.exe", "/K", "explorer" }
+	elseif vim.fn.has("unix") == 1 and vim.fn.executable("xdg-open") == 1 then
+		cmd = { "xdg-open" }
+	elseif (vim.fn.has("mac") == 1 or vim.fn.has("unix") == 1) and vim.fn.executable("open") == 1 then
+		cmd = { "open" }
+	end
+	if not cmd then
+		M.notify("Available system opening tool not found!", vim.log.levels.ERROR)
+	end
+	vim.fn.jobstart(vim.fn.extend(cmd, { path or vim.fn.expand("<cfile>") }), { detach = true })
 end
 
 neoTree.setup({
@@ -233,7 +234,9 @@ neoTree.setup({
 				--".null-ls_*",
 			},
 		},
-		follow_current_file = true, -- This will find and focus the file in the active buffer every
+		follow_current_file = {
+			enabled = true, -- This will find and focus the file in the active buffer every
+		},
 		-- time the current file is changed while the tree is open.
 		group_empty_dirs = false, -- when true, empty folders will be grouped together
 		hijack_netrw_behavior = "open_current", -- netrw disabled, opening a directory opens neo-tree
@@ -268,7 +271,9 @@ neoTree.setup({
 		commands = {}, -- Add a custom command or override a global one using the same function name
 	},
 	buffers = {
-		follow_current_file = true, -- This will find and focus the file in the active buffer every
+		follow_current_file = {
+			enabled = true, -- This will find and focus the file in the active buffer every
+		},
 		-- time the current file is changed while the tree is open.
 		group_empty_dirs = true, -- when true, empty folders will be grouped together
 		show_unloaded = true,
