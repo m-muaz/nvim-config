@@ -455,6 +455,37 @@ return packer.startup(function(use)
 		end,
 	})
 
+	-- Copilot
+	use({
+		"zbirenbaum/copilot.lua",
+		config = function()
+			require("copilot").setup({
+				panel = { auto_refresh = true },
+				layout = { position = "right" },
+				suggestion = {
+					keymap = { accept = "<S-l>", reject = "<ESC>", next = "<S-n>", prev = "<S-p>" },
+					auto_trigger = false,
+				},
+			})
+		end,
+	})
+	use({
+		"jonahgoldwastaken/copilot-status.nvim",
+		requires = { "zbirenbaum/copilot.lua" },
+		event = "BufReadPost",
+		-- config = function()
+		-- 	require("copilot_status").setup({
+		-- 		icons = {
+		-- 			idle = " ",
+		-- 			error = " ",
+		-- 			offline = " ",
+		-- 			loading = " ",
+		-- 		},
+		-- 		debug = false,
+		-- 	})
+		-- end,
+	})
+
 	-- Git
 	use({ "lewis6991/gitsigns.nvim", commit = "2c6f96dda47e55fa07052ce2e2141e8367cbaaf2" })
 	-- Lazygit plugin
