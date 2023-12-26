@@ -192,8 +192,8 @@ return packer.startup(function(use)
 	-- Vim Tex plugin
 	use({ "lervag/vimtex" })
 
-	-- Vim notify
-	use({ "rcarriga/nvim-notify" })
+	-- -- Vim notify
+	-- use({ "rcarriga/nvim-notify" })
 
 	-- Eyeline
 	use({
