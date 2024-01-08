@@ -258,8 +258,8 @@ return packer.startup(function(use)
   -- Vim Tex plugin
   use({ "lervag/vimtex" })
 
-  -- Vim notify
-  -- use({ "rcarriga/nvim-notify" })
+	-- -- Vim notify
+	-- use({ "rcarriga/nvim-notify" })
 
   -- Eyeline
   use({
@@ -272,39 +272,40 @@ return packer.startup(function(use)
     end,
   })
 
-  -- Neo-tree plugin
-  use({
-    "nvim-neo-tree/neo-tree.nvim",
-    branch = "v2.x",
-    requires = {
-      "nvim-lua/plenary.nvim",
-      "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
-      "MunifTanjim/nui.nvim",
-      {
-        -- only needed if you want to use the commands with "_with_window_picker" suffix
-        "s1n7ax/nvim-window-picker",
-        tag = "v1.*",
-        config = function()
-          require("window-picker").setup({
-            autoselect_one = true,
-            include_current = false,
-            filter_rules = {
-              -- filter using buffer options
-              bo = {
-                -- if the file type is one of following, the window will be ignored
-                filetype = { "neo-tree", "neo-tree-popup", "notify" },
-                -- if the buffer type is one of following, the window will be ignored
-                buftype = { "terminal", "quickfix" },
-              },
-            },
-            other_win_hl_color = "#e35e4f",
-          })
-        end,
-      },
-    },
-    config = function()
-      -- Unless you are still migrating, remove the deprecated commands from v1.x
-      vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
+	-- Neo-tree plugin
+	use({
+		"nvim-neo-tree/neo-tree.nvim",
+		branch = "v3.x",
+		requires = {
+			"nvim-lua/plenary.nvim",
+			"nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+			"MunifTanjim/nui.nvim",
+			{
+				-- only needed if you want to use the commands with "_with_window_picker" suffix
+				"s1n7ax/nvim-window-picker",
+				tag = "v1.*",
+				config = function()
+					require("window-picker").setup({
+						autoselect_one = true,
+						include_current = false,
+						filter_rules = {
+							-- filter using buffer options
+							bo = {
+								-- if the file type is one of following, the window will be ignored
+								filetype = { "neo-tree", "neo-tree-popup", "notify" },
+
+								-- if the buffer type is one of following, the window will be ignored
+								buftype = { "terminal", "quickfix" },
+							},
+						},
+						other_win_hl_color = "#e35e4f",
+					})
+				end,
+			},
+		},
+		config = function()
+			-- Unless you are still migrating, remove the deprecated commands from v1.x
+			vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
 
       -- If you want icons for diagnostic errors, you'll need to define them somewhere:
       vim.fn.sign_define("DiagnosticSignError", { text = " ", texthl = "DiagnosticSignError" })
@@ -384,18 +385,71 @@ return packer.startup(function(use)
     },
   })
 
-  -- Telescope
-  use({
-    "nvim-telescope/telescope.nvim",
-    tag = "0.1.2",
-    -- or                            , branch = '0.1.x',
-    requires = { { "nvim-lua/plenary.nvim" } },
-  })
-  -- Treesitter
-  use({
-    "nvim-treesitter/nvim-treesitter",
-    commit = "8e763332b7bf7b3a426fd8707b7f5aa85823a5ac",
-  })
+	-- Telescope
+	use({
+		"nvim-telescope/telescope.nvim",
+		tag = "0.1.2",
+		-- or                            , branch = '0.1.x',
+		requires = { { "nvim-lua/plenary.nvim" } },
+	})
+	-- -- Treesitter
+	-- use({
+	-- 	"nvim-treesitter/nvim-treesitter",
+	-- 	commit = "8e763332b7bf7b3a426fd8707b7f5aa85823a5ac",
+	-- })
+
+	use({ -- Highlight, edit, and navigate code
+		"nvim-treesitter/nvim-treesitter",
+		build = function()
+			pcall(require("nvim-treesitter.install").update({ with_sync = true }))
+		end,
+		config = function()
+			require("nvim-treesitter.configs").setup({
+				sync_install = false,
+				ensure_installed = {
+					"bash",
+					"c",
+					"javascript",
+					"json",
+					"lua",
+					"python",
+					"typescript",
+					"tsx",
+					"css",
+					"rust",
+					"java",
+					"yaml",
+					"markdown",
+					"markdown_inline",
+				}, -- one of "all" or a list of languages
+				ignore_install = { "phpdoc" }, -- List of parsers to ignore installing
+				highlight = {
+					enable = true, -- false will disable the whole extension
+					disable = { "css" }, -- list of language that will be disabled
+				},
+				autopairs = {
+					enable = true,
+				},
+				indent = { enable = true, disable = { "python", "css" } },
+
+				auto_install = true,
+				highlight = {
+					enable = true,
+					additional_vim_regex_highlighting = false,
+				},
+				-- indent = {
+				-- 	enable = true,
+				-- },
+				autotag = {
+					enable = true,
+				},
+			})
+
+			-- -- folding with treesitter
+			-- vim.opt.foldmethod = "expr"
+			-- vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+		end,
+	})
 
   use({
     "Pocco81/auto-save.nvim",
@@ -463,9 +517,40 @@ return packer.startup(function(use)
       })
       -- require("onedark").load()
 
-      -- vim.cmd([[colorscheme onedark]])
-    end,
-  })
+			-- vim.cmd([[colorscheme onedark]])
+		end,
+	})
+
+	-- Copilot
+	use({
+		"zbirenbaum/copilot.lua",
+		config = function()
+			require("copilot").setup({
+				panel = { auto_refresh = true },
+				layout = { position = "right" },
+				suggestion = {
+					keymap = { accept = "<S-l>", reject = "<ESC>", next = "<S-n>", prev = "<S-p>" },
+					auto_trigger = false,
+				},
+			})
+		end,
+	})
+	use({
+		"jonahgoldwastaken/copilot-status.nvim",
+		requires = { "zbirenbaum/copilot.lua" },
+		event = "BufReadPost",
+		-- config = function()
+		-- 	require("copilot_status").setup({
+		-- 		icons = {
+		-- 			idle = " ",
+		-- 			error = " ",
+		-- 			offline = " ",
+		-- 			loading = " ",
+		-- 		},
+		-- 		debug = false,
+		-- 	})
+		-- end,
+	})
 
 
   -- Nvim osc-52
