@@ -23,7 +23,7 @@ require("user.trouble")
 require("user.TODO")
 -- require "user.lsp_zero"
 require("user.LuaSnip")
-require("user.notify")
+-- require("user.notify")
 require("user.neotree")
 require("user.nvim-dap")
 require("user.cmake-nvim")
@@ -33,6 +33,10 @@ require("user.dap-virtual")
 -- vim.cmd('colorscheme catppuccin-mocha')
 vim.cmd([[colorscheme catppuccin-mocha]])
 
+-- -- Setting OSC Vim plugin to allow copying over ssh to windows terminal
+vim.keymap.set('n', '<leader>x', require('osc52').copy_operator, {expr = true})
+vim.keymap.set('n', '<leader>xx', '<leader>c_', {remap = true})
+vim.keymap.set('v', '<leader>x', require('osc52').copy_visual)
 
 -- Enable mouse support
 vim.o.mouse = "a"

@@ -137,6 +137,29 @@ return packer.startup(function(use)
     end,
   })
 
+  -- Custom plugins
+  -- Neorg plugin
+  use {
+    "nvim-neorg/neorg",
+    config = function()
+      require('neorg').setup {
+        load = {
+          ["core.defaults"] = {},        -- Loads default behaviour
+          ["core.concealer"] = {},       -- Adds pretty icons to your documents
+          ["core.dirman"] = {            -- Manages Neorg workspaces
+            config = {
+              workspaces = {
+                notes = "~/notes",
+              },
+            },
+          },
+        },
+      }
+    end,
+    run = ":Neorg sync-parsers",
+    requires = "nvim-lua/plenary.nvim",
+  }
+
   -- Barbecue.nvim
   use({
     "utilyre/barbecue.nvim",
@@ -236,7 +259,7 @@ return packer.startup(function(use)
   use({ "lervag/vimtex" })
 
   -- Vim notify
-  use({ "rcarriga/nvim-notify" })
+  -- use({ "rcarriga/nvim-notify" })
 
   -- Eyeline
   use({
@@ -444,6 +467,9 @@ return packer.startup(function(use)
     end,
   })
 
+
+  -- Nvim osc-52
+  use {'ojroques/nvim-osc52'}
   -- Git
   use({ "lewis6991/gitsigns.nvim", commit = "2c6f96dda47e55fa07052ce2e2141e8367cbaaf2" })
   -- Lazygit plugin

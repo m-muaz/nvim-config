@@ -4,7 +4,7 @@ local dap = require('dap')
 dap.adapters.python = {
   type = 'executable';
   -- command = os.getenv('HOME') .. '/.local/share/nvim/mason/packages/debugpy/venv/bin/python';
-  command = '/Users/muhammadmuaz/.local/share/nvim/mason/packages/debugpy/venv/bin/python',
+  command = '/home/mmuaz/.local/share/nvim/mason/packages/debugpy/venv/bin/python3',
   args = { '-m', 'debugpy.adapter' };
 }
 dap.configurations.python = {
