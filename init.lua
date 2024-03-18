@@ -27,17 +27,16 @@ require("user.LuaSnip")
 require("user.neotree")
 require("user.nvim-dap")
 require("user.cmake-nvim")
-
-
--- source ./after/colors/colorscheme.vim in here
--- vim.cmd([[source $HOME/.config/nvim/after/colors/colorscheme.vim]])
+require("user.dap-virtual")
 
 -- colorscheme
 -- vim.cmd('colorscheme catppuccin-mocha')
 vim.cmd([[colorscheme catppuccin-mocha]])
--- vim.cmd([[colorscheme wal]])
+
+-- -- Setting OSC Vim plugin to allow copying over ssh to windows terminal
+vim.keymap.set('n', '<leader>x', require('osc52').copy_operator, {expr = true})
+vim.keymap.set('n', '<leader>xx', '<leader>c_', {remap = true})
+vim.keymap.set('v', '<leader>x', require('osc52').copy_visual)
 
 -- Enable mouse support
 vim.o.mouse = "a"
-
-require("colorizer").setup()
