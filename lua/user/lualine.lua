@@ -51,17 +51,17 @@ local icons = require("personal.icons")
 
 -- stylua: ignore
 local colors = {
-  bg = '#202328',
-  fg = '#bbc2cf',
-  yellow = '#ECBE7B',
-  cyan = '#008080',
-  darkblue = '#081633',
-  green = '#98be65',
-  orange = '#FF8800',
-  violet = '#a9a1e1',
-  magenta = '#c678dd',
-  blue = '#51afef',
-  red = '#ec5f67'
+	bg = '#202328',
+	fg = '#bbc2cf',
+	yellow = '#ECBE7B',
+	cyan = '#008080',
+	darkblue = '#081633',
+	green = '#98be65',
+	orange = '#FF8800',
+	violet = '#a9a1e1',
+	magenta = '#c678dd',
+	blue = '#51afef',
+	red = '#ec5f67'
 }
 
 local conditions = {
@@ -477,7 +477,7 @@ ins_right({
 
 -- Add components to right sections
 ins_right({
-	"o:encoding", -- option component same as &encoding in viml
+	"o:encoding",      -- option component same as &encoding in viml
 	fmt = string.upper, -- I'm not sure why it's upper case either ;)
 	cond = conditions.hide_in_width,
 	color = {

@@ -69,6 +69,9 @@ return packer.startup(function(use)
 	-- Add plugin for indent blankline
 	use({ "lukas-reineke/indent-blankline.nvim" })
 
+  -- Add colorizer plugin
+  use({'norcalli/nvim-colorizer.lua'})
+
 	-- Colorschemes
 	use({ "folke/tokyonight.nvim", commit = "66bfc2e8f754869c7b651f3f47a2ee56ae557764" })
 	use({ "lunarvim/darkplus.nvim", commit = "13ef9daad28d3cf6c5e793acfc16ddbf456e1c83" })
@@ -193,7 +196,7 @@ return packer.startup(function(use)
 	use({ "lervag/vimtex" })
 
 	-- Vim notify
-	use({ "rcarriga/nvim-notify" })
+	-- use({ "rcarriga/nvim-notify" })
 
 	-- Eyeline
 	use({
@@ -206,6 +209,8 @@ return packer.startup(function(use)
 		end,
 	})
 
+  -- PyWal plugin
+  use({'dylanaraps/wal.vim'})
 	-- Neo-tree plugin
 	use({
 		"nvim-neo-tree/neo-tree.nvim",
@@ -456,19 +461,22 @@ return packer.startup(function(use)
 	})
 
 	-- Copilot
-	use({
-		"zbirenbaum/copilot.lua",
-		config = function()
-			require("copilot").setup({
-				panel = { auto_refresh = true },
-				layout = { position = "right" },
-				suggestion = {
-					keymap = { accept = "<S-l>", reject = "<ESC>", next = "<S-n>", prev = "<S-p>" },
-					auto_trigger = false,
-				},
-			})
-		end,
-	})
+  -- use({
+  --   'github/copilot.vim'
+  -- })
+	-- use({
+	-- 	"zbirenbaum/copilot.lua",
+	-- 	config = function()
+	-- 		require("copilot").setup({
+	-- 			panel = { auto_refresh = true },
+	-- 			layout = { position = "right" },
+	-- 			suggestion = {
+	-- 				keymap = { accept = "<S-l>", reject = "<ESC>", next = "<S-n>", prev = "<S-p>" },
+	-- 				auto_trigger = false,
+	-- 			},
+	-- 		})
+	-- 	end,
+	-- })
 	use({
 		"jonahgoldwastaken/copilot-status.nvim",
 		requires = { "zbirenbaum/copilot.lua" },

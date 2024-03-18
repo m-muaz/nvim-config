@@ -9,12 +9,12 @@ if not snip_status_ok then
 end
 
 require("luasnip/loaders/from_vscode").lazy_load()
--- luasnip.config.set_config(
---   {
---     -- Enable auto-triggered snippets
---     enable_autocompletion = true,
---   }
--- )
+luasnip.config.set_config(
+  {
+    -- Enable auto-triggered snippets
+    enable_autocompletion = false,
+  }
+)
 local check_backspace = function()
   local col = vim.fn.col "." - 1
   return col == 0 or vim.fn.getline("."):sub(col, col):match "%s"
@@ -115,10 +115,10 @@ cmp.setup {
     end,
   },
   sources = {
-    { name = "luasnip" },
-    { name = "nvim_lsp" },
-    { name = "buffer" },
-    { name = "path" },
+    { name = "luasnip" , priority=20},
+    { name = "nvim_lsp", priority=30 },
+    { name = "buffer", priority=40 },
+    { name = "path", priority=10 },
   },
   confirm_opts = {
     behavior = cmp.ConfirmBehavior.Replace,

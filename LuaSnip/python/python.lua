@@ -16,7 +16,7 @@ return
       {condition = line_begin}
     ),
     -- MAIN FUNCTION
-    s({trig="main", snippetType="autosnippet"},
+    s({trig="main"},
       fmta(
         [[
       if __name__ == "__main__":

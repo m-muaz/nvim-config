@@ -23,16 +23,21 @@ require("user.trouble")
 require("user.TODO")
 -- require "user.lsp_zero"
 require("user.LuaSnip")
-require("user.notify")
+-- require("user.notify")
 require("user.neotree")
 require("user.nvim-dap")
 require("user.cmake-nvim")
 
 
+-- source ./after/colors/colorscheme.vim in here
+-- vim.cmd([[source $HOME/.config/nvim/after/colors/colorscheme.vim]])
+
 -- colorscheme
 -- vim.cmd('colorscheme catppuccin-mocha')
 vim.cmd([[colorscheme catppuccin-mocha]])
-
+-- vim.cmd([[colorscheme wal]])
 
 -- Enable mouse support
 vim.o.mouse = "a"
+
+require("colorizer").setup()

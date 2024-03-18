@@ -3,6 +3,13 @@ if not status_ok then
 	return
 end
 
+local status_ok, copilot = pcall(require, "copilot")
+if not status_ok then
+  return
+else
+  require("copilot").setup()
+end
+
 local setup = {
 	plugins = {
 		marks = true, -- shows a list of your marks on ' and `
@@ -88,7 +95,19 @@ local mappings = {
 	["e"] = { "<Cmd>Neotree toggle<CR>", "Neotree" },
 	["w"] = { "<cmd>w!<CR>", "Save" },
 	["q"] = { "<cmd>q!<CR>", "Quit" },
-	["c"] = { "<cmd>Bdelete!<CR>", "Close Buffer" },
+	c = {
+		name = "Copilot & Buffer Close",
+		c = { "<cmd>Bdelete!<CR>", "Close Buffer" },
+		e = { "<cmd>Copilot enable<CR>", "Enable Copilot", { silent = true, expr = true } },
+		d = { "<cmd>Copilot disable<CR>", "Disable Copilot", { silent = true, expr = true } },
+		s = { "<cmd>Copilot status<CR>", "Copilot Status" },
+    p = {"<cmd>Copilot panel<CR>", "Copilot panel"},
+		-- j = { "<cmd>Copilot next<CR>", "Next Suggestion" },
+		-- k = { "<cmd>Copilot prev<CR>", "Prev Suggestion" },
+		-- a = { "<cmd>Copilot accept<CR>", "Accept Suggestion" },
+		-- x = { "<cmd>Copilot dismiss<CR>", "Dismiss Suggestion" },
+		-- g = { "<cmd>Copilot generate<CR>", "Generate Suggestion" },
+	},
 	["h"] = { "<cmd>nohlsearch<CR>", "No Highlight" },
 	["u"] = { "<cmd>ASToggle<CR>", "Auto Save Toggle" },
 	m = {
