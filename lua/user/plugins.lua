@@ -400,6 +400,9 @@ return packer.startup(function(use)
 		end,
 	})
 
+  use { "nvim-neotest/nvim-nio" }
+  use {'ojroques/nvim-osc52'}
+
 	-- One dark colorscheme
 
 	use({
